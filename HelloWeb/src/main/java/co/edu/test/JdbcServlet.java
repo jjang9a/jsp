@@ -44,13 +44,29 @@ public class JdbcServlet extends HttpServlet{
 		out.close();
 		
 		
-		Map<String, Object> in = new HashMap<>();
-		in.put("id", Integer.parseInt(req.getParameter("empId")));
-		in.put("first", req.getParameter("first"));
-		in.put("last", req.getParameter("last"));
-		in.put("hire", req.getParameter("hire"));
-		in.put("job", req.getParameter("job"));
-		in.put("email", req.getParameter("email"));
+//		Map<String, Object> in = new HashMap<>();
+//		in.put("id", Integer.parseInt(req.getParameter("empId")));
+//		in.put("first", req.getParameter("first"));
+//		in.put("last", req.getParameter("last"));
+//		in.put("hire", req.getParameter("hire"));
+//		in.put("job", req.getParameter("job"));
+//		in.put("email", req.getParameter("email"));
+		
+		newEmp emp = new newEmp();
+		emp.setId(Integer.parseInt(req.getParameter("nempId")));
+		emp.setFirst(req.getParameter("first"));
+		emp.setLast(req.getParameter("last"));
+		emp.setHire(req.getParameter("hire"));
+		emp.setJob(req.getParameter("job"));
+		emp.setEmail(req.getParameter("email"));
+		
+		int re = dao.insetEmp(emp);
+		if(re>0) {
+			System.out.println("입력성공");
+		}else {
+			System.out.println("입력실패");
+		}
+		
 		
 		out.print("<a href='temp.html'>조회-등록으로 이동</a>");
 	

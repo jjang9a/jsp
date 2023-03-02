@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import co.edu.test.newEmp;
 
 public class EmpDAO {
 	Connection conn;
@@ -42,18 +45,19 @@ public class EmpDAO {
 		return result;
 	}
 	
-	public int insetEmp(Map<String, Object> in) {
+	public int insetEmp(newEmp emp) {
 		int result = 0;
 		try {
 			connect();
-			String sql = "insert into employees (employee_id, first_name, last_name, hire_date, job_id, email) valuse (?,?,?,?,?)";
+			String sql = "insert into employees (employee_id, first_name, last_name, hire_date, job_id, email) valuse (?,?,?,?,?,?)";
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, (int) in.get("id"));
-			psmt.setString(2, "first");
-			psmt.setString(3, "last");
-			psmt.setDate(4, "hire");
-			
-			ResultSet rs = psmt.executeQuery();
+			psmt.setInt(1, emp.getId());
+			psmt.setString(2, emp.getFirst());
+			psmt.setString(3, emp.getLast());
+			psmt.setString(4, emp.getHire());
+			psmt.setString(5, emp.getJob());
+			psmt.setString(6, emp.getEmail());
+			result = psmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
