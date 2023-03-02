@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>javascript/event.html</title>
+    <style>
+		div#show {
+			background-color: yellow;
+			display: inline-block;
+			width : 500px;
+			height:350px;
+
+		}
+		div>span{
+			background-color: aquamarine;
+			display : inline-block;
+			width : 80px;
+			height:20px;
+			margin: 2px;
+			padding : 10px;
+		}
+	</style>
+</head>
+
+<body>
+    <input type="text" id="myVal">
+    <button id="clear">확인</button>
+    <div id="show">
+        <span>Lorem,</span>
+        <span>ipsum</span>
+    </div>
+
+    <script>
+        // 변경 : 사용자가 값을 입력하고 엔터키를 치면 클릭이벤트와 같은 기능 실행.
+        var str = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum corporis fuga facilis eligendi, velit tempora nobis vero, debitis et rem veritatis suscipit quae libero sint, dolore facere. Aspernatur, temporibus aliquam?`
+        var strAry = str.split(' ');
+        console.log(typeof strAry);
+        
+        // let list = '';
+
+        for(let i = 0; i<strAry.length; i++){
+            //DOM 활용. document.createElement('span'), elem.appendChild(span)
+            console.log(strAry[i]);
+            let span = document.createElement('span');
+            span.innerText = strAry[i];
+            document.getElementById('show').append(span);
+            // list += '<span>' + strAry[i] + '</span>'
+        }
+        // document.querySelector('#show').innerHTML=list;
+        
+        document.getElementById('clear').addEventListener('click', function(){
+            console.log(`click 이벤트 실행`);
+            let val = document.getElementById('myVal').value;
+            console.log(val);
+            // val & span 값 비교해서 같으면 span.remove();
+            let spans = document.querySelectorAll('div>span');
+            for (let i=0; i<spans.length; i++){
+                if(spans[i].innerText == val){
+                    spans[i].remove();
+                }
+            }
+
+            //사용자 입력값을 초기화
+            document.getElementById('myVal').value = '';
+        });
+        </script>
+</body>
+</html>
