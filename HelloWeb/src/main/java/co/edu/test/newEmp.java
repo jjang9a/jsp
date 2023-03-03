@@ -10,7 +10,16 @@ public class newEmp {
 	String hire;
 	String job;
 	String email;
+	String eId;
 	
+	public String geteId() {
+		return eId;
+	}
+
+	public void seteId(String eId) {
+		this.eId = eId;
+	}
+
 	public newEmp() {
 
 	}
@@ -61,6 +70,12 @@ public class newEmp {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "newEmp [id=" + id + ", first=" + first + ", last=" + last + ", hire=" + hire + ", job=" + job
+				+ ", email=" + email + ", eId=" + eId + "]";
 	}
 	
 	

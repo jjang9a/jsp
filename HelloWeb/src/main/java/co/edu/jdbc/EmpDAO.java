@@ -45,13 +45,13 @@ public class EmpDAO {
 		return result;
 	}
 	
-	public int insetEmp(newEmp emp) {
+	public int insertEmp(newEmp emp) {
 		int result = 0;
 		try {
 			connect();
-			String sql = "insert into employees (employee_id, first_name, last_name, hire_date, job_id, email) valuse (?,?,?,?,?,?)";
+			String sql = "insert into employees (employee_id, first_name, last_name, hire_date, job_id, email) values (?,?,?,?,?,?)";
 			PreparedStatement psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, emp.getId());
+			psmt.setString(1, emp.geteId());
 			psmt.setString(2, emp.getFirst());
 			psmt.setString(3, emp.getLast());
 			psmt.setString(4, emp.getHire());
@@ -63,4 +63,6 @@ public class EmpDAO {
 		}
 		return result;
 	}
+	
+//	public int insertEmp()
 }
