@@ -14,4 +14,24 @@ public class MemberServiceImpl implements MemberService{
 		return dao.memberList();
 	}
 
+	@Override
+	public boolean addMember(MemberVO vo) {
+		return dao.insertMember(vo) == 1;
+	}
+
+	@Override
+	public MemberVO getMember(String id) {
+		return dao.selectMember(id);
+	}
+
+	@Override
+	public boolean modifyMember(MemberVO vo) {
+		return dao.updateMember(vo) == 1;
+	}
+
+	@Override
+	public boolean removeMember(String id) {
+		return dao.deleteMember(id) == 1;
+	}
+
 }

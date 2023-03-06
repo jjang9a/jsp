@@ -1,4 +1,4 @@
-package co.dev.common;
+package co.dev.controller;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.dev.common.Control;
 import co.dev.service.EmpService;
 import co.dev.service.EmpServiceImpl;
 import co.dev.vo.EmpVO;

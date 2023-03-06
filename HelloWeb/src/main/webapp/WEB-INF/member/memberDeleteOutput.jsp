@@ -2,8 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/sidebar.jsp" %>
 <%@ include file="../includes/top.jsp" %>
-	<!-- http://localhost:8081/HelloWeb/main.do -->
-	<p>main.jsp</p>
-	<a href="memberList.do">회원목록</a><br>
-	<a href="empList.do">사원목록</a>
+	<% String msg = (String) request.getAttribute("message"); %>
+	<%
+		if(msg != null){
+	%>
+		<p><%=msg %></p>
+	<%
+		}
+	%>
+	<a href="memberList.do">목록 이동</a>
 <%@ include file="../includes/footer.jsp" %>
