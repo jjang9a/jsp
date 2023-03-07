@@ -24,6 +24,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberSearchForm.do">회원 조회</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberUpdateForm.do">회원정보 수정</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberDeleteForm.do">회원 삭제</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="noticeList.do">공지사항목록</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="noticeWriteForm.do">공지사항등록</a>
                 </div>
             </div>

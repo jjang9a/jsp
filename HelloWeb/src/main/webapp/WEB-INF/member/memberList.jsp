@@ -12,7 +12,7 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>id</th><th>name</th>
+				<th>id</th><th>name</th><th>pass</th><th>email</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,8 +20,10 @@
 			for (MemberVO member : list){
 		%>
 			<tr>
-				<td><%=member.getId() %></td>
+				<td><a href='http://localhost:8081/HelloWeb/memberSearch.do?job=search&id=<%=member.getId() %>'><%=member.getId() %></a></td>
 				<td><%=member.getName() %></td>
+				<td><%=member.getPasswd() %></td>
+				<td><%=member.getMail() %></td>
 			</tr>
 		<%
 			}	

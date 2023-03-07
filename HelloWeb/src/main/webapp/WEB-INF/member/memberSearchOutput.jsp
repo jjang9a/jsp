@@ -1,13 +1,8 @@
 <%@page import="co.dev.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>조회 결과</title>
-</head>
-<body>
+<%@ include file="../includes/sidebar.jsp" %>
+<%@ include file="../includes/top.jsp" %>
 	<%
 		MemberVO member = (MemberVO) request.getAttribute("vo");
 	%>
@@ -18,6 +13,5 @@
 	<p>메일 : <%=member.getMail() %></p>
 	
 	<a href="memberSearchForm.do">회원 조회 화면으로 이동</a>
-	
-</body>
-</html>
+
+<%@ include file="../includes/footer.jsp" %>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import co.dev.common.Control;
 import co.dev.service.MemberService;
-import co.dev.service.MemberServiceImpl;
+import co.dev.service.MemberServiceMybatis;
 import co.dev.vo.MemberVO;
 
 public class MemberListControl implements Control {
@@ -16,7 +16,7 @@ public class MemberListControl implements Control {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// 회원 목록을 보여주는 페이지 /WEB-INF/member/memberList.jsp
-		MemberService service = new MemberServiceImpl();
+		MemberService service = new MemberServiceMybatis();
 		service.getMembers();
 		List<MemberVO> list = service.getMembers();
 		
