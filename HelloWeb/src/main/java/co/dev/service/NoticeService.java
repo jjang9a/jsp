@@ -12,4 +12,10 @@ public interface NoticeService {
 	public boolean addNotice(NoticeVO vo);
 	// 상세조회
 	public NoticeVO getNotice(int nid);
+	// 전체 건수
+	public int getTotalCount();
+	// 수정
+	public boolean noticeModify(NoticeVO vo);
+	// 삭제
+	public boolean noticeRemove(int nid);
 }

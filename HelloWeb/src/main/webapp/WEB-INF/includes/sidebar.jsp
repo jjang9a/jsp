@@ -14,13 +14,19 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
+    
+
+    
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberList.do">회원목록보기</a>
+                    <% String auth = (String) session.getAttribute("auth"); %>
+                    <% if(auth != null && auth.equals("Admin")){ %>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberInsertForm.do">회원등록 페이지</a>
+                    <% } %>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberSearchForm.do">회원 조회</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberUpdateForm.do">회원정보 수정</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberDeleteForm.do">회원 삭제</a>

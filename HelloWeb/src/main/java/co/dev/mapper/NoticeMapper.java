@@ -11,4 +11,7 @@ public interface NoticeMapper {
 	public int insertNotice(NoticeVO vo); // 등록
 	public NoticeVO selectNotice(int nid); // 단건 조회
 	public int updateCount(int nid); // 조회수 증가
+	public int getTotalCount(); // 전체 글 수
+	public int updateNotice(NoticeVO vo);
+	public int deleteNotice(int nid);
 }

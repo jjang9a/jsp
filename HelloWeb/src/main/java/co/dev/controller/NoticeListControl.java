@@ -11,9 +11,10 @@ import co.dev.common.Control;
 import co.dev.service.NoticeService;
 import co.dev.service.NoticeServiceMybatis;
 import co.dev.vo.NoticeVO;
+import co.dev.vo.PageDTO;
 
 public class NoticeListControl implements Control {
-
+	public static PageDTO pageInfo = null;
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		String page = req.getParameter("page");
@@ -24,8 +25,10 @@ public class NoticeListControl implements Control {
 		// 글목록 - mybatis 활용
 		NoticeService service = new NoticeServiceMybatis();
 		List<NoticeVO> list = service.noticeList(Integer.parseInt(page)); // 공지사항 목록
-		
+		int total = service.getTotalCount();
 		req.setAttribute("list", list);
+		pageInfo = new PageDTO(Integer.parseInt(page), total);
+		req.setAttribute("page", pageInfo);
 		
 		try {
 			req.getRequestDispatcher("WEB-INF/notice/noticeList.jsp").forward(req, resp);
