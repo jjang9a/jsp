@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
             <!-- Page content wrapper-->
             <div id="page-content-wrapper">
                 <!-- Top navigation-->
@@ -13,11 +14,15 @@
                                 <%
                                 	String id = (String) session.getAttribute("id");
                                 %>
-                                <% if(id == null){ %>
-                                <li class="nav-item"><a class="nav-link" href="loginForm.do">로그인</a></li>
-                                <% }else{ %>
-                                <li class="nav-item"><a class="nav-link" href="logout.do">로그아웃</a></li>
-                                <% } %>
+                                <c:choose>
+                                	<c:when test="${id == null }">
+                                		<li class="nav-item"><a class="nav-link" href="loginForm.do">로그인</a></li>
+                                	</c:when>
+                            		<c:otherwise>
+                                		<li class="nav-item"><a class="nav-link" href="logout.do">로그아웃</a></li>
+                            		</c:otherwise>
+                                </c:choose>
+                        
                                 <li class="nav-item dropdown">
                                 <% if(id == null){ %>
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">welcome 🍭 guest 🍭</a>

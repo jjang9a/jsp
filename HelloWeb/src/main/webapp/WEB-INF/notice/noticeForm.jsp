@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../includes/sidebar.jsp" %>
-<%@ include file="../includes/top.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:include page="../includes/sidebar.jsp"></jsp:include>
+<jsp:include page="../includes/top.jsp"></jsp:include>
 
 <!-- 첨부파일이 있으면 항상 요청방식이 포스트타입이여야 함. -->
 <form action='noticeAdd.do' method='post' enctype="multipart/form-data">
@@ -10,7 +12,7 @@
 			<td>제목</td><td><input type="text" name="title"></td>
 		</tr>
 		<tr>
-			<td>작성자</td><td><input type="text" name="writer" readonly value="<%=id %>"></td>
+			<td>작성자</td><td><input type="text" name="writer" readonly value="${id }"></td>
 		</tr>
 		<tr>
 			<td>내용</td><td><textarea cols="30" rows="5" name="subject"></textarea></td>
@@ -52,4 +54,4 @@
 		this.submit();
 	})
 </script>
-<%@ include file="../includes/footer.jsp" %>
+<jsp:include page="../includes/footer.jsp"></jsp:include>
