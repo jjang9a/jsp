@@ -21,6 +21,6 @@
   
   <!-- /layouts/classic.tiles -->
   <definition name="WILDCARD:*/*" extends="myapp.helloapp">
-	<put-attribute name="body" value="WEB-INF/views/{1}/{2}.jsp" />
+	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
   </definition>
 </tiles-definitions>

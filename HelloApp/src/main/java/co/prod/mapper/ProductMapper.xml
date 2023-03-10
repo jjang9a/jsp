@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.prod.mapper.ProductMapper">
+
+  <select id="productList" resultType="ProductVO">
+    select * from product
+  </select>
+  
+  <select id="productInfo" resultType="ProductVO" parameterType="String">
+    select * from product where product_code = #{code}
+  </select>
+  
+  <select id="productReco" resultType="ProductVO">
+  	<![CDATA[
+    select * from (
+	select * from product order by like_it desc ) a
+	where rownum <= 4
+	]]>
+  </select>
+</mapper>
