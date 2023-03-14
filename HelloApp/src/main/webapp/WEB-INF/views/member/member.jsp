@@ -3,14 +3,14 @@
 <h3>Tiles가 적용된 member 페이지</h3>
 <div>
 	<table class="table">
-		<!-- <form> -->
-			id : <input type="text" id="id"><br>
-			name : <input type="text" id="name"><br>
-			passwd : <input type="text" id="passwd"><br>
-			email : <input type="text" id="email"><br>
-			auth : <input type="text" id="auth"><br>
-			<button id="addBtn">등록</button>
-		<!-- </form> -->
+		<form>
+			<tr><td>id : </td><td><input type="text" id="id"></td><br>
+			<tr><td>name : </td><td><input type="text" id="name"></td><br>
+			<tr><td>passwd : </td><td><input type="text" id="passwd"></td><br>
+			<tr><td>email : </td><td><input type="text" id="email"></td><br>
+			<tr><td>auth : </td><td><input type="text" id="auth"></td><br>
+			<tr><td colspan="2"><button id="addBtn">등록</button></td></tr>
+		</form>
 	</table>
 </div>
 
@@ -34,43 +34,7 @@
 		console.log(result); // result : [{}, {}, ... {}]
 		for (let i=0; i<result.length; i++){
 			let id = result[i].id;
-			let tr = document.createElement('tr');
-			// td만들기 (아이디, 이름, 비번, 메일, 권한)
-			for(let prop in result[i]){ // for .. in .. object의 필드 개수만큼 반복
-				let td = document.createElement('td');
-				td.innerText = result[i][prop];
-				tr.append(td); // tr의 자식으로 td를 집어넣음	
-			}
-			// 삭제 버튼
-			let delBtn = document.createElement('button'); // <button>삭제</button>
-			delBtn.innerText = '삭제';
-			delBtn.addEventListener('click', function(){
-				console.log(this); // this => 이벤트 대상
-				console.log(this.parentElement.parentElement.children[0].innerText);
-				let delId = this.parentElement.parentElement.children[0].innerText;
-				// ajax 호출
-				fetch('memberRemoveAjax.do', {
-					method : 'post',
-					headers : {'Content-Type' : 'application/x-www-form-urlencoded'}, // key=val&key=val 형식
-					body : 'id='+delId
-				})
-				.then(resolve => resolve.json()) // resolve라는 값이 json타입 {"retCode" : "Success"}으로 넘어옴
-				.then(result => {
-					console.log(result); //
-					if(result.retCode == 'Success'){
-						alert('성공!');
-						this.parentElement.parentElement.remove(); // 화면에서 지워주는 기능
-					} else if(result.retCode == 'Fail'){
-						alert('실패!');
-					}
-				})
-				.catch(reject => console.log(reject));
-			});
-			let td = document.createElement('td');
-			td.append(delBtn); // <td><button>삭제</button></td>
-			tr.append(td); // <tr>...<td><button>삭제</button></td></tr>
-			
-			document.getElementById('list').append(tr);
+			makeTr(result[i]);
 		}
 	})
 	.catch(function (reject){
@@ -78,7 +42,9 @@
 	})
 	
 	// 등록버튼 클릭 이벤트
- 	document.getElementById('addBtn').addEventListener('click', function(){
+ 	document.getElementById('addBtn').addEventListener('click', function (e){
+ 		e.preventDefault(); // 이벤트 기본 기능(submit) 차단. (폼으로 자동 전송되는 기능 막음)
+ 		
 		let id = document.querySelector('#id').value;
 		let nm = document.querySelector('#name').value;
 		let pw = document.querySelector('#passwd').value;
@@ -95,12 +61,66 @@
 			body: 'id='+id+'&name='+nm+'&passwd='+pw+'&email='+ma+'&auth='+au
 		
 		})
-		.then(resolve => resolve.json())
+		.then(resolve => resolve.json()) // {"id":"user1", "name":"hong" ...}
 		.then(result => {
 			console.log(result);
+			if(result.retCode == 'Success'){
+				alert('성공!');
+				// 추가된 값을 화면에 출력 start
+				makeTr(result.member);
+				// 추가된 값 화면 출력 end
+				initField();
+			} else if(result.retCode == 'Fail'){
+				alert('실패!');
+			}
 		})
 		.catch(reject => console.error(reject));
 	});
 	
+	// tr 생성
+	function makeTr(member={}){
+		// 완료
+		let tr = document.createElement('tr');
+		for(let prop in member){
+			let td = document.createElement('td');
+			td.innerText = member[prop];
+			tr.append(td);
+		}
+		let delBtn = document.createElement('button'); // <button>삭제</button>
+		delBtn.innerText = '삭제';
+		delBtn.addEventListener('click', function(){
+			let delId = this.parentElement.parentElement.children[0].innerText;
+			// ajax 호출
+			fetch('memberRemoveAjax.do', {
+				method : 'post',
+				headers : {'Content-Type' : 'application/x-www-form-urlencoded'}, // key=val&key=val 형식
+				body : 'id='+delId
+			})
+			.then(resolve => resolve.json()) // resolve라는 값이 json타입 {"retCode" : "Success"}으로 넘어옴
+			.then(result => {
+				console.log(result); //
+				if(result.retCode == 'Success'){
+					alert('성공!');
+					this.parentElement.parentElement.remove(); // 화면에서 지워주는 기능
+				} else if(result.retCode == 'Fail'){
+					alert('실패!');
+				}
+			})
+			.catch(reject => console.log(reject));
+		});
+		let td = document.createElement('td');
+		td.append(delBtn); // <td><button>삭제</button></td>
+		tr.append(td); // <tr>...<td><button>삭제</button></td></tr>
+		
+		document.getElementById('list').append(tr);
+	}
+	
+	function initField(){
+		document.getElementById('id').value = '';
+		document.getElementById('name').value = '';
+		document.getElementById('passwd').value = '';
+		document.getElementById('email').value = '';
+		document.getElementById('auth').value = '';
+	}
 
 </script>
