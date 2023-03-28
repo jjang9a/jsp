@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mockaroo.html</title>
+</head>
+<body>
+    <form action="">
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th><input type="number" name="" id="id"></th>
+            </tr>
+            <tr>
+                <th>first_name</th>
+                <th><input type="text" name="" id="fn"></th>
+            </tr>
+            <tr>
+                <th>last_name</th>
+                <th><input type="text" name="" id="ln"></th>
+            </tr>
+            <tr>
+                <th>salary</th>
+                <th><input type="number" name="" id="sl"></th>
+            </tr>
+            <tr>
+                <th>email</th>
+                <th><input type="email" name="" id="em"></th>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="button" id="addBtn">추가</button>
+                    <button>초기화</button>
+                    <button id="modBtn">수정</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table border="1">
+        <thead>
+            <!--<th>firstName</th>
+            <th>lastName</th>
+            <th>salary</th-->
+            <!--보여줄 항목을 함수를 이용해서-->
+        </thead>
+        <tbody id="list">
+            <!--<tr> <td>이름</td> <td>성씨</td> <td>2000</td> </tr>-->
+
+        </tbody>
+    </table>
+
+<script>
+    let persons = `[{"id":1,"first_name":"Nikita","last_name":"Fountian","email":"nfountian0@mlb.com","gender":"Male","salary":1877},
+{"id":2,"first_name":"Zebedee","last_name":"Caldwell","email":"zcaldwell1@jimdo.com","gender":"Male","salary":3062},
+{"id":3,"first_name":"Lou","last_name":"Welden","email":"lwelden2@oaic.gov.au","gender":"Male","salary":4347},
+{"id":4,"first_name":"Layton","last_name":"Weddell","email":"lweddell3@technorati.com","gender":"Bigender","salary":3724},
+{"id":5,"first_name":"Any","last_name":"Kristoffersson","email":"akristoffersson4@fema.gov","gender":"Male","salary":3800},
+{"id":6,"first_name":"Jenilee","last_name":"Klasing","email":"jklasing5@umn.edu","gender":"Female","salary":4849},
+{"id":7,"first_name":"Bailie","last_name":"Vitet","email":"bvitet6@mtv.com","gender":"Male","salary":2719},
+{"id":8,"first_name":"Sullivan","last_name":"Pigford","email":"spigford7@desdev.cn","gender":"Male","salary":2143},
+{"id":9,"first_name":"Dukey","last_name":"Trapp","email":"dtrapp8@sun.com","gender":"Male","salary":1002},
+{"id":10,"first_name":"Flss","last_name":"Wavish","email":"fwavish9@prnewswire.com","gender":"Female","salary":1051},
+{"id":11,"first_name":"Ricki","last_name":"Batham","email":"rbathama@sciencedaily.com","gender":"Male","salary":4581},
+{"id":12,"first_name":"Sonnie","last_name":"Suerz","email":"ssuerzb@altervista.org","gender":"Male","salary":1972},
+{"id":13,"first_name":"Cinderella","last_name":"Cheeseman","email":"ccheesemanc@nytimes.com","gender":"Female","salary":4677},
+{"id":14,"first_name":"Hersch","last_name":"Cowtherd","email":"hcowtherdd@google.es","gender":"Male","salary":1454},
+{"id":15,"first_name":"Kerwinn","last_name":"McDavid","email":"kmcdavide@google.ru","gender":"Male","salary":3951},
+{"id":16,"first_name":"Minetta","last_name":"MacSween","email":"mmacsweenf@microsoft.com","gender":"Female","salary":4690},
+{"id":17,"first_name":"Munroe","last_name":"Chishull","email":"mchishullg@mashable.com","gender":"Male","salary":2344},
+{"id":18,"first_name":"Wendie","last_name":"Kubacki","email":"wkubackih@mediafire.com","gender":"Female","salary":3411},
+{"id":19,"first_name":"Thomasin","last_name":"Tarling","email":"ttarlingi@jugem.jp","gender":"Polygender","salary":2686},
+{"id":20,"first_name":"Linn","last_name":"Hiddersley","email":"lhiddersleyj@google.cn","gender":"Female","salary":4865}]`;
+
+// 추가기능
+// document.querySelector('form>table>tbody>tr>td>buttn')
+document.querySelector('#addBtn').addEventListener('click', addMember);
+
+function addMember(e){
+    e.preventDefault() // form태그의 기본 기능인 submit 차단 = 이벤트의 기본 기능 차단(ex.하이퍼링크 - 페이지 이동X)
+    let id, fn, ln, em, sal;
+    let person = {
+    };
+    person.id = document.querySelector('#id').value;
+    person.first_name = document.querySelector('#fn').value;
+    person.last_name = document.querySelector('#ln').value;
+    person.email = document.querySelector('#em').value;
+    person.salary = document.querySelector('#sl').value;
+    console.log('새 사람 : ', person)
+    makeRow(person);
+}
+
+// 수정기능
+document.querySelector('#modBtn').addEventListener('click', modifyMember);
+
+function modifyMember(e){
+    e.preventDefault();
+    // id값을 찾아옴
+    let id = document.getElementById('id').value;
+    let fn = document.getElementById('fn').value;
+    let ln = document.getElementById('ln').value;
+    let em = document.getElementById('em').value;
+    let sl = document.getElementById('sl').value;
+
+    // tr요소
+    let tr = document.getElementById(id);
+    console.log(tr);
+    tr.children[1].innerText = fn; // first_name값을 목록의 2번째 td에 담음
+    tr.children[2].innerText = ln;
+    tr.children[3].innerText = sl;
+    tr.children[4].innerText = em;
+}
+
+persons = JSON.parse(persons); // json문자열 -> 자바스크립트의 object로 변환
+console.log(persons); // persons <- 배열
+
+// 보여줄 필드 설정 배열
+let showProps = ['id', 'first_name', 'last_name', 'salary', 'email'];
+
+// thead의 항목을 동적으로 보여주기 위한 함수
+function makeHead(){
+    let tr = document.createElement('tr');
+    showProps.forEach(function(prop){ // <- 첫번째것만 쓰고 싶습니다 라고 지정
+        let td = document.createElement('th');
+        td.innerText = prop.toUpperCase();
+        tr.append(td);
+    });
+    td = document.createElement('th');
+    td.innerText = '삭제';
+    tr.append(td)
+
+    document.querySelector('table>thead').append(tr);
+}
+makeHead();
+
+
+// person = {firstName : 'kildong', lastName:'Hong', salary:2000}
+            // => person 한 건을 활용하여 tr 생성
+    function makeRow(person = {
+        id : '', // person이라는 객체가 이렇게 생겼다는 것을 소개
+        first_name : 'kildong', 
+        last_name:'Hong', 
+        salary:2000
+    }){
+        // 이름 성씨 급여
+        // 방법1
+        let tr = document.createElement('tr')
+        tr.addEventListener('mouseover', function(){
+            // mouserover : 마우스 포인트가 엘리먼트 위로 진입했을때 발생 (반대 : mouseout)
+            // this.setAttribute('style', 'background-color:red')
+            tr.style.backgroundColor = 'yellow'
+        })
+        // tr.addEventListener('mouseout', function(){
+        //     this.setAttribute('style', 'background-color:none')
+        //     // tr.style.backgroundColor = null;
+        // })
+        tr.onmouseout = function(){ 
+            this.setAttribute('style', 'background-color:none')
+            // tr.style.backgroundColor = null;
+        }
+        tr.addEventListener('click', function(){
+            let inputs = document.querySelectorAll('form input');
+            inputs.forEach(function(input, idx){
+                input.value = tr.children[idx].innerText
+                // form 안에있는 input 태그를 모두 불러와서 tr의 자식들을 쭉 돌며 텍스트를 넣어준다
+            })
+            // document.querySelector('#id').value = this.firstChild.innerText;
+            // document.querySelector('#fn').value = this.firstChild.nextSibling.innerText;
+            // document.querySelector('#ln').value = this.children[2].innerText;
+            // document.querySelector('#sl').value = this.querySelector('td:nth-of-type(4)').innerText;
+            // // document.querySelector('#ln').value = this.firstChild.nextSibling.nextSibling.innerText;
+            // // document.querySelector('#sl').value = this.firstChild.nextSibling.nextSibling.nextSibling.innerText;
+            // document.querySelector('#em').value = this.lastChild.previousSibling.innerText;
+        })
+        showProps.forEach(function(prop,idx,array) {
+            /* forEach라는 함수는 매개값으로 함수를 받음
+                매개값의 순서가 괄호안의 값.
+                prop는 요소 idx는 인덱스, array는 배열 그 자체를 의미
+            */
+            // console.log(prop,idx,array);
+
+            let td = document.createElement('td')
+            let txt = document.createTextNode(person[prop]);
+            td.append(txt);
+            tr.append(td);
+            tr.setAttribute('id', person.id); // <td id='1'></tr>
+        });
+
+        // 버튼 추가(삭제) <td><button>삭제</button></td>
+        let btn = document.createElement('button');
+            // dom 요소 = createElement로 만들어지는 모든것들 (document object model)
+        btn.innerText = '삭제';
+        btn.addEventListener('click', function(){
+            // 서버에 해당 데이터 삭제처리...(ajax)
+            // fetch().them().then().catch();
+            // btn.parentElement.parentElement.remove(); // 버튼의 상위요소인 td, 그 td의 상위요소인 tr을 제거
+            document.getElementById(person.id).remove();
+        });
+        let td = document.createElement('td');
+        td.append(btn);
+        tr.append(td);
+
+
+        document.getElementById('list').append(tr)
+
+        // let td = document.createElement('td')
+        // let txt = document.createTextNode(person.first_name);
+        // td.append(txt);
+        // tr.append(td);
+        // td = document.createElement('td')
+        // txt = document.createTextNode(person.last_name);
+        //         // td.innerText = person.firstName; 방법으로도 가능
+        // td.append(txt);
+        // tr.append(td);
+        // td = document.createElement('td')
+        // txt = document.createTextNode(person.salary);
+        // td.append(txt);
+        // tr.append(td);
+        // let list = document.getElementById('list')
+        // list.append(tr)
+    }
+    // makeRow({firstName:'길동', lastName:'홍', salary:2000});
+    persons.forEach(function(person) {
+        // console.log(person)
+        makeRow(person);
+    });
+</script>
+
+</body>
+</html>
