@@ -16,8 +16,8 @@ public class ProductInfoControl implements Control {
 	public String exec(HttpServletRequest request, HttpServletResponse response) {
 		ProductService service = new ProductServiceImpl();
 		
-		String code = "CF0003";
-		ProductVO prod = service.prod(code);
+		String code = request.getParameter("code");
+		ProductVO prod = service.getProduct(code);
 		List<ProductVO> reco = service.recomend();
 		
 		request.setAttribute("info", prod);

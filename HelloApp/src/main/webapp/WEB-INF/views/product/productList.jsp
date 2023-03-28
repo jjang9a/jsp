@@ -12,7 +12,9 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="./images/${list.get(i).image }" alt="..." />
+                             <a href="productInfo.do?code=${list.get(i).productCode }">
+                            	<img class="card-img-top" src="./images/${list.get(i).image }" alt="..." />
+                            </a>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import co.prod.common.DataSource;
 import co.prod.mapper.ProductMapper;
 import co.prod.vo.ProductVO;
+import co.prod.vo.ReplyVO;
 
 public class ProductServiceImpl implements ProductService{
 
@@ -19,13 +20,28 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ProductVO prod(String code) {
+	public ProductVO getProduct(String code) {
 		return mapper.productInfo(code);
 	}
 
 	@Override
 	public List<ProductVO> recomend() {
 		return mapper.productReco();
+	}
+
+	@Override
+	public List<ReplyVO> replyList(String code) {
+		return mapper.replyList(code);
+	}
+
+	@Override
+	public boolean replyRemove(int no) {
+		return mapper.replyDelete(no) == 1;
+	}
+
+	@Override
+	public boolean addReply(ReplyVO vo) {
+		return mapper.insertReply(vo) == 1;
 	}
 
 }

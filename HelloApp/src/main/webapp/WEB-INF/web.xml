@@ -19,7 +19,7 @@
 	
 	<servlet>
 		<servlet-name>front</servlet-name>
-		<servlet-class>co.start.common.FrontController</servlet-class>
+		<servlet-class>co.prod.common.FrontController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>front</servlet-name>

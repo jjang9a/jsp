@@ -19,4 +19,21 @@
 	where rownum <= 4
 	]]>
   </select>
+  
+  <select id="replyList" parameterType="string" resultType="ReplyVO">
+  	select * from product_reply where product_code = #{code}
+  </select>
+  
+  <delete id="replyDelete" parameterType="int">
+  	delete from product_reply where reply_no = #{no}
+  </delete>
+  
+  <insert id="insertReply" parameterType="ReplyVO">
+  	<selectKey keyProperty="replyNo" resultType="int" order="BEFORE">
+  		select reply_seq.nextval from dual
+  		<!-- 생성되는 키 값을 미리 받아와서 처리 -->
+  	</selectKey>
+  	insert into product_reply (reply_no, reply_writer, reply_content, product_code)
+  	values (#{replyNo}, #{replyWriter}, #{replyContent}, #{productCode})
+  </insert>
 </mapper>
