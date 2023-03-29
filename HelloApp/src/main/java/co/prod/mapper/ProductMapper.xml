@@ -36,4 +36,19 @@
   	insert into product_reply (reply_no, reply_writer, reply_content, product_code)
   	values (#{replyNo}, #{replyWriter}, #{replyContent}, #{productCode})
   </insert>
+  
+  <select id="selectReply" parameterType="int" resultType="ReplyVO">
+  	select * from product_reply where reply_no=#{rid}
+  </select>
+  
+  <update id="updateReply" parameterType="ReplyVO">
+  	update product_reply set reply_writer=#{replyWriter}, reply_content=#{replyContent} where reply_no=#{replyNo}
+  </update>
+  
+  <select id="chartInfo" resultType="map">
+	select department_name, count(*) as "cnt"
+	from employees e join departments d
+	on e.department_id = d.department_id
+	group by department_name
+  </select>
 </mapper>

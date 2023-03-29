@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prod.controller.ChartAjax;
+import co.prod.controller.ChartControl;
 import co.prod.controller.MemberAddAjax;
 import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
@@ -19,8 +21,10 @@ import co.prod.controller.MembersControl;
 import co.prod.controller.ProductInfoControl;
 import co.prod.controller.ProductListControl;
 import co.prod.controller.ReplyAddAjax;
-import co.prod.controller.ReplyRemoveAjax;
 import co.prod.controller.ReplyListAjax;
+import co.prod.controller.ReplyRemoveAjax;
+import co.prod.controller.ReplySearchAjax;
+import co.prod.controller.ReplyUpdateAjax;
 
 public class FrontController extends HttpServlet {
 	private Map<String, Control> map;
@@ -41,9 +45,15 @@ public class FrontController extends HttpServlet {
 		map.put("/productList.do", new ProductListControl());
 		//상품 한 건 정보
 		map.put("/productInfo.do", new ProductInfoControl());
+		//댓글
 		map.put("/replyListAjax.do", new ReplyListAjax());
 		map.put("/replyRemoveAjax.do", new ReplyRemoveAjax());
 		map.put("/replyAddAjax.do", new ReplyAddAjax());
+		map.put("/replySearchAjax.do", new ReplySearchAjax());
+		map.put("/replyUpdateAjax.do", new ReplyUpdateAjax());
+		//차트
+		map.put("/chart.do", new ChartControl());
+		map.put("/chartAjax.do", new ChartAjax());
 	}
 	
 	@Override
