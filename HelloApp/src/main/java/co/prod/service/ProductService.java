@@ -3,6 +3,7 @@ package co.prod.service;
 import java.util.List;
 import java.util.Map;
 
+import co.prod.vo.EventVO;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
 
@@ -18,4 +19,8 @@ public interface ProductService {
 	public boolean modifyReply(ReplyVO vo);
 	
 	public List<Map<String,Object>> chartInfo();
+	
+	public List<EventVO> eventList();
+	public boolean addEvent(EventVO vo);
+	public boolean removeEvent(EventVO vo);
 }

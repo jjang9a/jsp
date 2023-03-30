@@ -51,4 +51,16 @@
 	on e.department_id = d.department_id
 	group by department_name
   </select>
+  
+  <select id="eventList" resultType="EventVO">
+  	select title, start_date as "start", end_date as "end" from full_calender order by 1
+  </select>
+  
+  <insert id="addEvent" parameterType="EventVO">
+  	insert into full_calender values(#{title}, #{start}, #{end})
+  </insert>
+  
+  <delete id="deleteEvent" parameterType="EventVO">
+  	delete from full_calender where title=#{title} and start_date=#{start} and end_date=#{end}
+  </delete>
 </mapper>

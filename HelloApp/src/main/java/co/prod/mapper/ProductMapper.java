@@ -3,6 +3,7 @@ package co.prod.mapper;
 import java.util.List;
 import java.util.Map;
 
+import co.prod.vo.EventVO;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
 
@@ -19,4 +20,8 @@ public interface ProductMapper {
 	public int updateReply(ReplyVO vo);
 	// 차트
 	public List<Map<String, Object>> chartInfo();
+	// 달력
+	public List<EventVO> eventList();
+	public int addEvent(EventVO vo);
+	public int deleteEvent(EventVO vo);
 }

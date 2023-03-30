@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.prod.controller.CalendarListAjax;
+import co.prod.controller.CalendatAddAjax;
+import co.prod.controller.CalendatDeleteAjax;
+import co.prod.controller.CarlendarControl;
 import co.prod.controller.ChartAjax;
 import co.prod.controller.ChartControl;
+import co.prod.controller.CovidForm;
+import co.prod.controller.MapForm;
 import co.prod.controller.MemberAddAjax;
 import co.prod.controller.MemberListAjax;
 import co.prod.controller.MemberListControl;
@@ -54,6 +60,13 @@ public class FrontController extends HttpServlet {
 		//차트
 		map.put("/chart.do", new ChartControl());
 		map.put("/chartAjax.do", new ChartAjax());
+		map.put("/covid19.do",new CovidForm());
+		map.put("/map.do", new MapForm());
+		
+		map.put("/calendar.do", new CarlendarControl());
+		map.put("/calendarListAjax.do", new CalendarListAjax());
+		map.put("/calendarAddAjax.do", new CalendatAddAjax());
+		map.put("/calendarDeleteAjax.do", new CalendatDeleteAjax());
 	}
 	
 	@Override

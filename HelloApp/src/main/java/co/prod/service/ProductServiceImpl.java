@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import co.prod.common.DataSource;
 import co.prod.mapper.ProductMapper;
+import co.prod.vo.EventVO;
 import co.prod.vo.ProductVO;
 import co.prod.vo.ReplyVO;
 
@@ -58,6 +59,22 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<Map<String, Object>> chartInfo() {
 		return mapper.chartInfo();
+	}
+
+	@Override
+	public List<EventVO> eventList() {
+		return mapper.eventList();
+	}
+
+	@Override
+	public boolean addEvent(EventVO vo) {
+		return mapper.addEvent(vo) == 1;
+	}
+
+	@Override
+	public boolean removeEvent(EventVO vo) {
+		System.out.println(vo);
+		return mapper.deleteEvent(vo) == 1;
 	}
 
 }

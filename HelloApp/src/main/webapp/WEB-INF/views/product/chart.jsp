@@ -13,45 +13,30 @@
 		google.charts.setOnLoadCallback(drawChart);
 
 
-		function drawChart() {
+		async function drawChart() {
 			//[{'Admin':1},{'Accounting':2},...]
-			fetch('chartAjax.do')
-				.then(resolve => resolve.json())
-				.then(result => {
-					//console.log(result);
-					let outAry = [];
-					outAry.push(['dept', 'cnt per dept']); // 타이틀 역할을 만들어주기위한 첫번째 데이터를 넣어줌
-					result.forEach(dept => {
-						//console.log(dept)
-						let ary = []
+			console.log("1");
+			let outAry = [];
+			outAry.push(['dept', 'cnt per dept']);
+			let promise1 = await fetch('chartAjax.do') // promise 타입의 객체 : 성공하면 then이라는 곳의, 실패하면 catch라고 하는 곳의 함수를 실행시킴
+			let promise2 = promise1.json() // promise1이 가지고 있는 값을 json포맷으로 바꾼 객체 <- 결과값은 배열형태 [{}, {}, ...]
+			console.log("1-1")
+			promise2.forEach(dept => {
+				let ary = [];
+				for(let prop in dept){
+					ary[0] = prop;
+					ary[1] = dept[prop]; // dept의 속성의 값들
+				}
+				outAry.push(ary)
+			})
+			console.log("1-2")
+			var data = google.visualization.arrayToDataTable(outAry);
 
-						for (prop in dept) {
-							ary[0] = prop;
-							ary[1] = dept[prop]
-						}
-						//console.log(ary);
-						outAry.push(ary); // 가공
-					})
-					console.log(outAry);
-					var data = google.visualization.arrayToDataTable(outAry);
-					/*  var data = google.visualization.arrayToDataTable([
-					   ['Task', 'Hours per Day'], // 첫번째 데이터는 타이틀 역할을 함
-					   ['Work',     11], // 두번째 부터는 값
-					   ['Eat',      2],
-					   ['Commute',  2],
-					   ['Watch TV', 2],
-					   ['Sleep',    7],
-					   ['Game',    7]
-					 ]); // 배열값으로 값을 넣어줌 */
-
-					var options = {
-						title: 'Person By Department'
-					};
-					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-					chart.draw(data, options);
-				})
-				.catch(reject => console.error(reject));
-
+			var options = { title: 'Person By Department' };
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(data, options);	
+			
+			console.log("2");
 		}
 	</script>
 </head>
