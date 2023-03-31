@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic2.html</title>
+    <script src="./jquery-3.6.4.min.js"></script>
+    <script>
+        // page의 컨텐츠가 다 다운로드 된 다음에 script 실행 (body의 맨 밑에 있는것과 같은 효과)
+        //document.addEventListener('DOMContentLoaded', function(){
+        $(document).ready(function () {
+            // elem.innerHTML = '<ul id="list"><li>Apple</li></ul>'
+            $('div#show').html('<ul id="list"><li>Apple</li></ul>') // .html = innerHTML
+
+            // createElement
+            let li = $('<li />').text('Banana') // .text = innerText
+                .css('color', 'red')
+                .attr('class', 'important');
+            //li.text('Banana'); 
+            console.log(li);
+            $('#list').append(li);
+            $('#list').append($('<li>Cherry</li>'),
+                $('<li />').text('Melon'),
+                $('<li />').text('Grape').on('click', function () {
+                    alert('clicked')
+                })
+            );
+            $('li:eq(3)').css('background-color', 'yellow'); // eq(n) : 인덱스가 n인 요소 선택
+            $('li:gt(2)').css('color', 'green') // gt(n) : 인덱스가 n보다 큰 요소 전부 선택
+            $('li:not(:eq(0))').css('font-style', 'italic') // 인덱스가 0이 아닌 요소
+            $('li:contains(Melon)').css('font-weight', 'bold') // 내용에 Melon을 포함하고 있는 요소
+
+            //input
+            $('input:text').val('user01'); // input중 타입이 text인 요소 선택
+            $('input[type="email"]').css('background-color', 'yellow')
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <div id="show">
+        <!--         <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Cherry</li>
+        </ul> -->
+    </div>
+
+    <form action=''>
+        Id : <input type="text" name="" id=""><br>
+        Pw : <input type="password" name="" id=""><br>
+        Mail : <input type="email" name="" id=""><br>
+    </form>
+</body>
+
+</html>

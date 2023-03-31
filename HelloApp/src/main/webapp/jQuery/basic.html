@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery/basic.html</title>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+    <!-- Using jQuery with a CDN (방식을 이용하면) 
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.min.js"></script> -->
+    <script src="./jquery-3.6.4.min"></script>
+
+    <script>
+        // this : 객체 안에서 사용 = 객체 자신, 함수에서 사용 = 전역객체(window), 이벤트에서 사용 = 이벤트를 받는 대상(event.target)
+        // $() => jquery객체 : 메소드(함수)기반으로 움직임
+        // 자바스크립트 : 객체(Document Object Model) : document.children, document.querySelector()
+        // window.document = document
+        console.log(document);
+        console.log($(document));
+
+        function callWindow() {
+            console.log(this); // window 객체
+        }
+        callWindow();
+
+        let obj = {
+            name: '홍길동',
+            age: 20,
+            showAge: function () {
+                console.log("이름은 " + this.name + ", 나이는 " + this.age);
+            }
+        }
+        obj.showAge();
+
+        $(document).ready(function () {
+            //를 짧게 쓰면 아래의 한줄이 됨
+        });
+        $(function () {
+            console.log(this) // window -> document (왜냠 제이쿼리 객체라서, js함수는 window임)
+            console.log(document.querySelector('p:nth-of-type(2)'));
+            console.log($('p:eq(0)')); // jquery객체의 모습
+            $("p").on("click", function () { // p태그중 첫번째꺼만 가져오겠다 - 선택자 이용
+                // $(대상).on 대상에 이벤트를 걸겠다는 메소드 on (지금은 화면상의 모든 p에다가 걺)
+                /* document.querySelector('p').forEach(function(pTag){
+                    pTag.addEventListener('click', function(){
+                        pTag.style.color = 'red';
+                    })
+                }); 와 같은 문장 */
+                $(this).css("color",
+                "red"); // style {'font':bold, 'color':'red', 'back':'blue'}... 등 스타일 지정 메소드 css
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <p>규리쨩 하이요</p>
+    <p>제가 아침에 책사야해서 제 장바구니를 뒤지는데 왜넣어놨는지 모를 책이 있는거에요
+        근데 책끝이있다 있어서 한번 넘겨봤는데 미췬 개흥미돋이라
+        바로 결제갈김
+    </p>
+</body>
+
+</html>
