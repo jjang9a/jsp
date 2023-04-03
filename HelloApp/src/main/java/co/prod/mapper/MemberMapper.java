@@ -3,6 +3,7 @@ package co.prod.mapper;
 import java.util.List;
 
 import co.prod.vo.MemberVO;
+import co.prod.vo.MembersVO;
 
 
 
@@ -18,5 +19,13 @@ public interface MemberMapper {
 	
 	// 회원 등록
 	public int insertMember(MemberVO vo);
+	
+	// new List
+	public List<MembersVO> memberList();
+	public int addNewMember(MembersVO vo);
+	public int deleteMembers(List<MembersVO> list); // 여러건 한번에 삭제
+	// delete from members where member_id = ('user01', 'user02', 'user03')
+	
+	
 	
 }

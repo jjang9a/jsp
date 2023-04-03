@@ -3,6 +3,7 @@ package co.prod.service;
 import java.util.List;
 
 import co.prod.vo.MemberVO;
+import co.prod.vo.MembersVO;
 
 
 
@@ -19,4 +20,10 @@ public interface MemberService {
 	public boolean removeMember(String id);
 	// id/pw 로그인 처리
 	public MemberVO login(MemberVO vo);
+	
+	
+	// new List
+	public List<MembersVO> getMemberList();
+	public boolean addNewMember(MembersVO vo);
+	public boolean deleteMembers(List<MembersVO> list);
 }

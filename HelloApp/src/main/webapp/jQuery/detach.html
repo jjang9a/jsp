@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          // 왼쪽 -> 오른쪽
+          $('button:eq(0)').on('click',function(){
+            $('select[name="right"]').append($('select[name="left"]>option:selected'));
+          })
+
+          // 오른쪽 -> 왼쪽
+          $('button:eq(1)').on('click',function(){
+            $('select[name="left"]').append($('select[name="right"]>option:selected'));
+          })
+
+        })
+    </script>
+</head>
+<body>
+    
+    <select name="left" id="" multiple style="height: 100px;">
+      <option value="">item1</option>
+      <option value="">item2</option>
+      <option value="">item3</option>
+      <option value="">item4</option>
+      <option value="">item5</option>
+    </select>
+
+    <button>+</button>
+    <button>-</button>
+
+    <select name="right" id="" multiple style="height: 100px;">
+        <option value="">item6</option>
+        <option value="">item7</option>
+        <option value="">item8</option>
+        <option value="">item9</option>
+        <option value="">item10</option>
+      </select>
+
+      <!--select[name="left"][multiple]-->
+
+</body>
+</html>
