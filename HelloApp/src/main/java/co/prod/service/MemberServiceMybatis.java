@@ -6,10 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import co.prod.common.DataSource;
 import co.prod.mapper.MemberMapper;
+import co.prod.vo.EmpVO;
 import co.prod.vo.MemberVO;
 import co.prod.vo.MembersVO;
-
-
 
 public class MemberServiceMybatis implements MemberService {
 
@@ -18,7 +17,7 @@ public class MemberServiceMybatis implements MemberService {
 	private SqlSession sqlSession = DataSource.getInstance().openSession(true);
 	// Mapper.xml 파일의 메소드를 호출.
 	private MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-	
+
 	@Override
 	public List<MemberVO> getMembers() {
 		return mapper.getMembers();
@@ -61,9 +60,28 @@ public class MemberServiceMybatis implements MemberService {
 		return mapper.addNewMember(vo) == 1;
 	}
 
+//	@Override public boolean deleteMembers(List<MembersVO> list) {
+//		return mapper.deleteMembers(list) > 0; 
+//	}
+
 	@Override
-	public boolean deleteMembers(List<MembersVO> list) {
-		return mapper.deleteMembers(list) > 0;
+	public boolean removeMemberAry(String[] users) {
+		return mapper.deleteMembersAry(users) > 0;
+	}
+
+	@Override
+	public List<EmpVO> employeeList() {
+		return mapper.selectEmployees();
+	}
+
+	@Override
+	public boolean addEmp(EmpVO vo) {
+		return mapper.addEmp(vo) == 1;
+	}
+
+	@Override
+	public boolean delEmp(int id) {
+		return mapper.delEmp(id) == 1;
 	}
 
 }

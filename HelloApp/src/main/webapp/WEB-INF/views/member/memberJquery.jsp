@@ -107,13 +107,30 @@
                 e.preventDefault();
                 // $(":checked").parentsUntil('tbody').remove();
                 // $(":checked").closest('tr').remove();
-                let memberIdAray = {}
+                let memberIdAray = ''; // memberId=user01&memberId=user02&MemberId=user03....
                 $('#list input:checked').each(function (idx, item) {
                     // memberIdAray.push({'memberId': $(item).parent().parent().attr('id')})
                     // $(item).closest('tr').remove();
-                    memberIdAray.memberId = $(item).parent().parent().attr('id');
+                    memberIdAray += '&memberId=' + $(item).parent().parent().attr('id');
                 })
                 console.log(memberIdAray);
+
+                // ajax 호출
+                $.ajax({
+                    url: 'memberRemoveJquery.do', // 호출할 컨트롤
+                    method: 'post',
+                    data: memberIdAray.substring(1), //memberId=user01&memberId=user02&...
+                    success: function (result) {
+                        if (result.retCode == 'Success')
+                            $('#list input:checked').closest('tr').remove();
+                        else
+                            alert('error!!!')
+                    },
+                    error: function (reject) {
+
+                    }
+                })
+
             })
 
             // 전체 선택, 제거
@@ -122,20 +139,6 @@
                 $('td>input').prop({
                     checked: this.checked
                 })
-
-                // ajax 호출
-                $.ajax({
-                    url: '', // 호출할 컨트롤
-                    method: 'post',
-                    data: memberIdAray, //memberId=user01&memberId=user02&...
-                    success: function (result) {
-
-                    },
-                    error: function (reject) {
-
-                    }
-                })
-
             })
 
             // 전체 다 선택되면 위에도 선택되게끔

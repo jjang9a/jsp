@@ -29,10 +29,35 @@
   	insert into members values (#{memberId}, #{memberName}, #{memberTel}, #{memberAddr}, #{memberPw})
   </insert>
   
-  <update id="deleteMembers" parameterType="co.prod.vo.MembersVO">
+<!--   <update id="deleteMembers" parameterType="co.prod.vo.MembersVO">
   	delete from members
-  	<foreach collection="list" item="item" open="where member_id in(" close=")" separator="," >
+  	<foreach collection="list" item="item" open="where member_id in (" close=")" separator="," >
   		#{item.memberId}
   	</foreach>
-  </update>
+  </update> -->
+  
+  <delete id="deleteMembersAry" parameterType="string">
+  	delete from members
+  	<foreach collection="array" item="member" open="where member_id in (" close=")" separator="," >
+  		#{member}
+  	</foreach>
+  </delete>
+  
+  <select id="selectEmployees" resultType="co.prod.vo.EmpVO">
+  	select * from employees order by employee_id
+  </select>
+  
+  <insert id="addEmp" parameterType="co.prod.vo.EmpVO">
+  	<selectKey keyProperty="employeeId" resultType="int" order="BEFORE">
+  		select employees_seq.nextval from dual
+  		<!-- 생성되는 키 값을 미리 받아와서 처리 -->
+  	</selectKey>
+  	insert into employees (employee_id, first_name, last_name, email, job_id, hire_date, salary)
+  	values (#{employeeId}, #{firstName}, #{lastName}, #{email}, 'IT_PROG', #{hireDate}, #{salary})
+  </insert>
+  
+  <delete id="delEmp" parameterType="int">
+  	delete from employees where employee_id = #{id}
+  </delete>
+  
 </mapper>

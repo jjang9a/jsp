@@ -2,10 +2,9 @@ package co.prod.service;
 
 import java.util.List;
 
+import co.prod.vo.EmpVO;
 import co.prod.vo.MemberVO;
 import co.prod.vo.MembersVO;
-
-
 
 public interface MemberService {
 	// 회원 목록
@@ -25,5 +24,14 @@ public interface MemberService {
 	// new List
 	public List<MembersVO> getMemberList();
 	public boolean addNewMember(MembersVO vo);
-	public boolean deleteMembers(List<MembersVO> list);
+	// public boolean deleteMembers(List<MembersVO> list);
+	public boolean removeMemberAry(String[] users);
+	
+	// dataTable
+	// 사원목록
+	public List<EmpVO> employeeList();
+	public boolean addEmp(EmpVO vo);
+	public boolean delEmp(int id);
+	
+	
 }

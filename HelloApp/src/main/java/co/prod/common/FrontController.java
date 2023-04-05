@@ -18,6 +18,10 @@ import co.prod.controller.CarlendarControl;
 import co.prod.controller.ChartAjax;
 import co.prod.controller.ChartControl;
 import co.prod.controller.CovidForm;
+import co.prod.controller.DataTableAdd;
+import co.prod.controller.DataTableAjax;
+import co.prod.controller.DataTableDelete;
+import co.prod.controller.DataTableForm;
 import co.prod.controller.MapForm;
 import co.prod.controller.MemberAddAjax;
 import co.prod.controller.MemberAddJquery;
@@ -58,6 +62,14 @@ public class FrontController extends HttpServlet {
 		map.put("/memberListJquery.do", new MemberListJquery());
 		map.put("/memberAddJquery.do", new MemberAddJquery());
 		map.put("/memberRemoveJquery.do", new MemberRemoveJquery());
+		
+		// datatable 활용
+		// dataTableForm.do => 화면 출력
+		// dataTableAjax.do => 데이터 출력
+		map.put("/dataTableForm.do", new DataTableForm());
+		map.put("/dataTableAjax.do", new DataTableAjax());
+		map.put("/dataTableAdd.do", new DataTableAdd());
+		map.put("/dataTableDelete.do", new DataTableDelete());
 		
 		//상품 목록
 		map.put("/productList.do", new ProductListControl());
